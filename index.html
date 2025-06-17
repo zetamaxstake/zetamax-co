@@ -1,0 +1,829 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Zetamax Coin (ZTMX) – Smart Transactions. Limitless Ambition.</title>
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <!-- Font Awesome for social media icons and other icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <!-- Chart.js CDN for charts -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.1/dist/chart.umd.min.js"></script>
+    <style>
+        /* Custom styles for gradients and refined look */
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #1a202c; /* Dark background */
+            color: #e2e8f0; /* Light text */
+            line-height: 1.6;
+        }
+        .gradient-hero {
+            background: linear-gradient(135deg, #4c51bf 0%, #6b46c1 100%); /* Deeper purple-blue gradient */
+        }
+        .gradient-section {
+            background: linear-gradient(135deg, #2d3748 0%, #1a202c 100%); /* Darker gradient for sections */
+        }
+        .btn-primary {
+            background: linear-gradient(90deg, #a78bfa 0%, #6d28d9 100%); /* Purple button gradient */
+            transition: transform 0.2s ease-in-out, box-shadow 0.2s ease-in-out;
+            border-radius: 9999px; /* Full rounded for pill shape */
+            padding: 0.75rem 2.5rem; /* Adjust padding for better look */
+        }
+        .btn-primary:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 25px rgba(109, 40, 217, 0.6);
+        }
+        .social-icon-colored {
+            transition: transform 0.2s ease-in-out;
+            color: currentColor; /* Fallback */
+        }
+        .social-icon-colored:hover {
+            transform: translateY(-3px);
+            filter: brightness(1.2); /* Slightly brighten on hover */
+        }
+        .card {
+            background-color: #2d3748; /* Darker card background */
+            transition: transform 0.2s ease-in-out, box-shadow 0.2s ease-in-out;
+            border-radius: 0.75rem; /* Rounded corners */
+        }
+        .card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 12px 25px rgba(0, 0, 0, 0.4);
+        }
+        /* Custom animation for pulsating effect on hero headline */
+        @keyframes pulse-ring {
+            0% {
+                box-shadow: 0 0 0 0 rgba(167, 139, 250, 0.7);
+            }
+            70% {
+                box-shadow: 0 0 0 15px rgba(167, 139, 250, 0);
+            }
+            100% {
+                box-shadow: 0 0 0 0 rgba(167, 139, 250, 0);
+            }
+        }
+        .animate-pulse-ring {
+            animation: pulse-ring 2s infinite cubic-bezier(0.66, 0, 0.0, 1);
+        }
+
+        /* Stylish Flash/Pulse Effect for Button */
+        @keyframes button-pulse-effect {
+            0% {
+                transform: scale(1);
+                box-shadow: 0 5px 15px rgba(109, 40, 217, 0.4);
+            }
+            50% {
+                transform: scale(1.02); /* Slightly enlarge */
+                box-shadow: 0 8px 25px rgba(109, 40, 217, 0.8); /* More intense glow */
+            }
+            100% {
+                transform: scale(1);
+                box-shadow: 0 5px 15px rgba(109, 40, 217, 0.4);
+            }
+        }
+        .animate-button-pulse {
+            animation: button-pulse-effect 2s infinite ease-in-out;
+        }
+
+
+        /* SVG logo custom sizing and positioning */
+        .zetamax-logo {
+            width: 38px; /* Default size for smaller screens */
+            height: 38px;
+            min-width: 38px; /* Ensure it doesn't shrink too much */
+        }
+        @media (min-width: 768px) {
+            .zetamax-logo {
+                width: 48px; /* Larger size for desktop */
+                height: 48px;
+                min-width: 48px;
+            }
+        }
+        /* Style for the ZTMX text inside the logo */
+        .ztmx-text {
+            font-family: 'Inter', sans-serif; /* Use Inter for consistency */
+            font-weight: 800; /* Extra bold */
+            font-size: 28px; /* Adjust size to fit hexagon */
+        }
+
+
+        /* Roadmap specific styling */
+        .roadmap-item {
+            position: relative; /* Needed for absolute positioning of line and point */
+            padding-bottom: 3rem; /* Space between items */
+        }
+        .roadmap-item:last-child {
+            padding-bottom: 0;
+        }
+        .roadmap-line {
+            position: absolute;
+            left: 50%;
+            transform: translateX(-50%);
+            top: 0;
+            height: 100%;
+            width: 2px;
+            background-color: #8b5cf6;
+            z-index: 0;
+        }
+        .roadmap-item:last-child .roadmap-line {
+            height: 50%; /* Adjust height for the last item's line */
+        }
+        .roadmap-point {
+            position: absolute;
+            left: 50%;
+            transform: translate(-50%, -50%); /* Center the point */
+            background-color: #6d28d9;
+            width: 30px; /* Increased size for prominence */
+            height: 30px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1rem; /* Slightly larger icon */
+            font-weight: bold;
+            color: white;
+            z-index: 1;
+            border: 3px solid #a78bfa; /* Thicker border */
+            box-shadow: 0 0 0 6px rgba(167, 139, 250, 0.4); /* Larger shadow */
+        }
+
+        /* FAQ accordion styles */
+        .faq-question {
+            cursor: pointer;
+            user-select: none;
+        }
+        .faq-answer {
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.3s ease-out;
+        }
+        .faq-answer.active {
+            max-height: 300px; /* Increased max-height for longer answers */
+            transition: max-height 0.5s ease-in;
+        }
+        .faq-question i {
+            transition: transform 0.3s ease-out;
+        }
+        .faq-question i.rotate-180 {
+            transform: rotate(180deg);
+        }
+
+        /* Disclaimer specific styling */
+        .disclaimer-text {
+            font-size: 0.75rem; /* Smaller font for disclaimer */
+            color: #9ca3af; /* Slightly lighter gray */
+            padding: 1rem 0;
+            border-top: 1px solid rgba(255, 255, 255, 0.1); /* Subtle separator */
+            margin-top: 1rem;
+        }
+
+        /* Chart container styling for responsiveness */
+        .chart-container {
+            position: relative;
+            margin: auto;
+            width: 80%; /* Adjust as needed */
+            max-width: 400px; /* Max width for the chart itself */
+            height: 400px; /* Fixed height for the chart to maintain aspect ratio */
+            background-color: #2d3748; /* Background for the chart area */
+            border-radius: 0.75rem;
+            padding: 1rem; /* Padding around the chart */
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+        }
+        @media (max-width: 768px) {
+            .chart-container {
+                width: 95%; /* Make it wider on smaller screens */
+                height: 350px; /* Slightly smaller height on mobile */
+            }
+        }
+    </style>
+</head>
+<body class="antialiased">
+
+    <!-- Header -->
+    <header class="bg-gray-900 shadow-lg fixed w-full z-50">
+        <nav class="container mx-auto px-6 py-4 flex justify-between items-center">
+            <a href="#" class="text-3xl font-bold text-white flex items-center rounded-lg p-2">
+                <!-- Professional Zetamax Coin SVG Logo with ZTMX Symbol -->
+                <svg class="zetamax-logo mr-3" viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <rect width="100" height="100" fill="transparent" />
+                    <!-- Background circle for depth and focus -->
+                    <circle cx="50" cy="50" r="48" fill="url(#logoBackgroundGradient)" />
+
+                    <!-- Main ZTMX symbol, bold and central -->
+                    <text x="50" y="58" class="ztmx-text" text-anchor="middle" dominant-baseline="middle" fill="#FFFFFF">ZTMX</text>
+
+                    <defs>
+                        <radialGradient id="logoBackgroundGradient" cx="50%" cy="50%" r="50%" fx="50%" fy="50%">
+                            <stop offset="0%" stop-color="#4c51bf" />
+                            <stop offset="100%" stop-color="#6b46c1" />
+                        </radialGradient>
+                    </defs>
+                </svg>
+                Zetamax Coin
+            </a>
+            <div class="hidden md:flex space-x-8">
+                <a href="#home" class="text-gray-300 hover:text-white transition duration-300 rounded-md px-3 py-2">Home</a>
+                <a href="#about-us" class="text-gray-300 hover:text-white transition duration-300 rounded-md px-3 py-2">About Us</a>
+                <a href="#tokenomics" class="text-gray-300 hover:text-white transition duration-300 rounded-md px-3 py-2">Tokenomics</a>
+                <a href="#roadmap" class="text-gray-300 hover:text-white transition duration-300 rounded-md px-3 py-2">Roadmap</a>
+                <a href="#faq" class="text-gray-300 hover:text-white transition duration-300 rounded-md px-3 py-2">FAQ</a>
+                <a href="#official-links" class="text-gray-300 hover:text-white transition duration-300 rounded-md px-3 py-2">Links</a>
+                <a href="https://example.com/whitepaper.pdf" target="_blank" class="text-gray-300 hover:text-white transition duration-300 rounded-md px-3 py-2 flex items-center">
+                    <i class="fas fa-file-alt mr-2"></i> Whitepaper
+                </a>
+            </div>
+            <div class="md:hidden">
+                <button id="menu-button" class="text-white focus:outline-none">
+                    <i class="fas fa-bars text-2xl"></i>
+                </button>
+            </div>
+        </nav>
+        <!-- Mobile Menu -->
+        <div id="mobile-menu" class="md:hidden hidden bg-gray-800 pb-4">
+            <a href="#home" class="block text-gray-300 hover:text-white px-6 py-2">Home</a>
+            <a href="#about-us" class="block text-gray-300 hover:text-white px-6 py-2">About Us</a>
+            <a href="#tokenomics" class="block text-gray-300 hover:text-white px-6 py-2">Tokenomics</a>
+            <a href="#roadmap" class="block text-gray-300 hover:text-white px-6 py-2">Roadmap</a>
+            <a href="#faq" class="block text-gray-300 hover:text-white px-6 py-2">FAQ</a>
+            <a href="#official-links" class="block text-gray-300 hover:text-white px-6 py-2">Links</a>
+            <a href="https://example.com/whitepaper.pdf" target="_blank" class="block text-gray-300 hover:text-white px-6 py-2 flex items-center">
+                <i class="fas fa-file-alt mr-2"></i> Whitepaper
+                </a>
+        </div>
+    </header>
+
+    <!-- Hero Section -->
+    <section id="home" class="gradient-hero text-white text-center py-24 md:py-32 flex items-center justify-center min-h-screen">
+        <div class="container mx-auto px-6 max-w-4xl">
+            <h1 class="text-4xl md:text-6xl font-extrabold leading-tight mb-6 animate-pulse-ring rounded-full inline-block p-4">
+                Zetamax Coin – Smart Transactions. Limitless Ambition.
+            </h1>
+            <p class="text-lg md:text-xl mb-8 max-w-3xl mx-auto opacity-90">
+                A next-generation decentralized cryptocurrency built on Binance Smart Chain, empowering users through borderless finance, passive income, and trustless smart contracts.
+            </p>
+            <div class="flex flex-wrap justify-center items-center gap-4 mb-10">
+                <span class="bg-green-600 text-white text-sm font-semibold px-4 py-2 rounded-full shadow-md flex items-center">
+                    <i class="fas fa-check-circle mr-2"></i> Listed on PancakeSwap
+                </span>
+                <span class="bg-blue-600 text-white text-sm font-semibold px-4 py-2 rounded-full shadow-md flex items-center">
+                    <i class="fas fa-decentralized-finance-fill mr-2"></i> 100% Decentralized, No Admin Control
+                </span>
+            </div>
+            <p class="text-xl md:text-2xl font-semibold mb-10">
+                🚀 Be part of the financial revolution!
+            </p>
+            <a href="https://pancakeswap.finance/swap?outputCurrency=0x424fbEAAb23303561b96872eE46863e68264054c" target="_blank" class="btn-primary text-white font-semibold py-3 px-10 rounded-full shadow-lg hover:shadow-xl transition duration-300 text-lg flex items-center justify-center mx-auto max-w-xs animate-button-pulse">
+                <i class="fas fa-shopping-cart mr-3"></i> Buy ZTMX Now
+            </a>
+        </div>
+    </section>
+
+    <!-- About Us Section -->
+    <section id="about-us" class="py-20 md:py-28 bg-gray-800 text-gray-200">
+        <div class="container mx-auto px-6 text-center max-w-5xl">
+            <h2 class="text-4xl font-bold mb-12 text-white">ℹ️ About Us: Revolutionizing Decentralized Finance</h2>
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
+                <div class="text-left">
+                    <p class="text-lg mb-6 leading-relaxed">
+                        Zetamax Coin (ZTMX) is at the forefront of a new era in decentralized finance. We've engineered a transparent, blockchain-based ecosystem designed to empower individuals with genuine crypto income, regardless of their prior experience. Our innovative staking platform, fortified by immutable smart contracts, ensures secure, automated income generation and provides rewarding incentives for community engagement—all without the need for intermediaries or central administrators.
+                    </p>
+                    <blockquote class="text-xl italic border-l-4 border-purple-500 pl-4 py-2 bg-gray-700 rounded-md shadow-inner text-gray-300">
+                        "Zetamax isn't just a digital asset; it's a commitment to financial liberation."
+                    </blockquote>
+                </div>
+                <div>
+                    <img src="https://placehold.co/600x400/2d3748/e2e8f0?text=Empowering+Decentralized+Finance" alt="About Zetamax Coin" class="w-full h-auto rounded-xl shadow-2xl">
+                </div>
+            </div>
+
+            <div class="mt-20 grid grid-cols-1 md:grid-cols-2 gap-10">
+                <div class="card p-8 rounded-xl shadow-lg hover:shadow-2xl flex flex-col items-center text-center">
+                    <div class="text-5xl text-purple-400 mb-6"><i class="fas fa-bullseye"></i></div>
+                    <h3 class="text-2xl font-semibold mb-4 text-white">🎯 Our Mission</h3>
+                    <p class="text-gray-300">
+                        To redefine financial autonomy by providing a secure, automated, and genuinely rewarding decentralized finance (DeFi) platform, ensuring fair and accessible passive income for every participant.
+                    </p>
+                </div>
+                <div class="card p-8 rounded-xl shadow-lg hover:shadow-2xl flex flex-col items-center text-center">
+                    <div class="text-5xl text-purple-400 mb-6"><i class="fas fa-eye"></i></div>
+                    <h3 class="text-2xl font-semibold mb-4 text-white">👁️ Our Vision</h3>
+                    <p class="text-gray-300">
+                        To cultivate the world’s most trusted and robust decentralized staking ecosystem, where radical transparency, unbridled financial freedom, and sustainable long-term wealth creation converge—driven by a vibrant community and cutting-edge blockchain technology.
+                    </p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Tokenomics Section -->
+    <section id="tokenomics" class="gradient-section py-20 md:py-28 text-gray-200">
+        <div class="container mx-auto px-6 text-center max-w-5xl">
+            <h2 class="text-4xl font-bold mb-12 text-white">💰 Tokenomics: Fair Distribution for Sustainable Growth</h2>
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
+                <div class="card p-8 rounded-xl shadow-lg hover:shadow-2xl text-left">
+                    <h3 class="text-3xl font-bold text-white mb-6">Zetamax (ZTMX) Key Details</h3>
+                    <div class="overflow-x-auto">
+                        <table class="w-full text-lg table-auto rounded-lg overflow-hidden">
+                            <thead class="bg-gray-700 text-gray-300">
+                                <tr>
+                                    <th class="py-3 px-4 text-left rounded-tl-lg">Property</th>
+                                    <th class="py-3 px-4 text-left rounded-tr-lg">Details</th>
+                                </tr>
+                            </thead>
+                            <tbody class="divide-y divide-gray-700">
+                                <tr class="bg-gray-800">
+                                    <td class="py-3 px-4">Token Name</td>
+                                    <td class="py-3 px-4 font-semibold text-white">Zetamax Coin</td>
+                                </tr>
+                                <tr class="bg-gray-700">
+                                    <td class="py-3 px-4">Symbol</td>
+                                    <td class="py-3 px-4 font-semibold text-white">ZTMX</td>
+                                </tr>
+                                <tr class="bg-gray-800">
+                                    <td class="py-3 px-4">Blockchain</td>
+                                    <td class="py-3 px-4 font-semibold text-white">Binance Smart Chain (BEP-20)</td>
+                                </tr>
+                                <tr class="bg-gray-700">
+                                    <td class="py-3 px-4">Contract Address</td>
+                                    <td class="py-3 px-4 font-semibold text-purple-400 break-all">0x424fbEAAb23303561b96872eE46863e68264054c</td>
+                                </tr>
+                                <tr class="bg-gray-800">
+                                    <td class="py-3 px-4">Total Supply</td>
+                                    <td class="py-3 px-4 font-semibold text-white">300,000,000 ZTMX (30 Crore)</td>
+                                </tr>
+                                <tr class="bg-gray-700">
+                                    <td class="py-3 px-4">Admin Control</td>
+                                    <td class="py-3 px-4 font-semibold text-green-400">❌ Fully Decentralized, No Admin Access</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+                <div class="card p-8 rounded-xl shadow-lg hover:shadow-2xl flex flex-col items-center justify-center">
+                    <h3 class="text-3xl font-bold text-white mb-6">Transparent Distribution Model</h3>
+                    <div class="chart-container mb-8">
+                        <canvas id="distributionChart"></canvas>
+                    </div>
+                    <div class="text-gray-300 text-left w-full max-w-sm mx-auto">
+                        <ul class="list-disc list-inside space-y-2">
+                            <li><strong>Liquidity:</strong> 40% - Ensuring stable trading and market depth.</li>
+                            <li><strong>Staking Reward:</strong> 22% - Incentivizing long-term holding and network security.</li>
+                            <li><strong>Presale:</strong> 20% - Fair initial distribution to early supporters.</li>
+                            <li><strong>Development:</strong> 10% - Funding ongoing platform enhancements and innovation.</li>
+                            <li><strong>Creator:</strong> 5% - Supporting the core visionaries behind Zetamax.</li>
+                            <li><strong>Software Maintenance:</strong> 3% - Dedicated to continuous security audits and system upkeep.</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Roadmap Section -->
+    <section id="roadmap" class="py-20 md:py-28 bg-gray-800 text-gray-200">
+        <div class="container mx-auto px-6 text-center max-w-5xl">
+            <h2 class="text-4xl font-bold mb-12 text-white">🗺️ Roadmap: Our Journey Towards Decentralized Excellence</h2>
+            <div class="relative max-w-4xl mx-auto py-8">
+                <!-- Vertical Line for Roadmap (visible on desktop) -->
+                <div class="roadmap-line hidden md:block"></div>
+
+                <div class="flex flex-col space-y-16">
+
+                    <!-- Item 1: Token Creation & PancakeSwap -->
+                    <div class="relative roadmap-item flex flex-col md:flex-row items-center justify-between w-full">
+                        <div class="md:w-1/2 md:pr-10 text-right mb-6 md:mb-0 order-2 md:order-1">
+                            <div class="card p-6 rounded-xl shadow-lg hover:shadow-2xl">
+                                <h3 class="text-2xl font-semibold text-white mb-3">✅ Completed Milestones:</h3>
+                                <ul class="list-disc list-inside text-gray-300 text-left space-y-2 pl-4">
+                                    <li>**Token Creation & Smart Contract Launch:** Foundation laid with robust BEP-20 token.</li>
+                                    <li>**Listed on PancakeSwap DEX:** Ensuring immediate accessibility and liquidity.</li>
+                                </ul>
+                            </div>
+                        </div>
+                        <div class="roadmap-point top-0 md:top-auto md:absolute md:translate-y-0">
+                            <i class="fas fa-check-circle"></i>
+                        </div>
+                        <div class="md:w-1/2 md:pl-10 text-left order-1 md:order-3">
+                            <!-- Empty div to push the content to opposite side on desktop -->
+                        </div>
+                    </div>
+
+                    <!-- Item 2: Live Analytics & User Dashboard -->
+                    <div class="relative roadmap-item flex flex-col md:flex-row items-center justify-between w-full">
+                        <div class="md:w-1/2 md:pl-10 text-left mb-6 md:mb-0 order-2 md:order-3">
+                            <div class="card p-6 rounded-xl shadow-lg hover:shadow-2xl">
+                                <h3 class="text-2xl font-semibold text-white mb-3">Live Analytics & Intuitive User Dashboard</h3>
+                                <p class="text-gray-300 text-left">
+                                    Providing ZTMX holders with comprehensive real-time insights and a personalized interface to manage their assets and earnings.
+                                </p>
+                            </div>
+                        </div>
+                        <div class="roadmap-point top-0 md:top-auto md:absolute md:translate-y-0">
+                            <i class="fas fa-chart-line"></i>
+                        </div>
+                        <div class="md:w-1/2 md:pr-10 text-right order-1 md:order-1">
+                            <!-- Empty div -->
+                        </div>
+                    </div>
+
+                    <!-- Item 3: Mobile-Friendly Web App (PWA) -->
+                    <div class="relative roadmap-item flex flex-col md:flex-row items-center justify-between w-full">
+                        <div class="md:w-1/2 md:pr-10 text-right mb-6 md:mb-0 order-2 md:order-1">
+                            <div class="card p-6 rounded-xl shadow-lg hover:shadow-2xl">
+                                <h3 class="text-2xl font-semibold text-white mb-3">🚀 Upcoming Milestones:</h3>
+                                <ul class="list-disc list-inside text-gray-300 text-left space-y-2 pl-4">
+                                    <li>**Mobile-First Web App (PWA) Launch:** Seamless access and functionality across all devices.</li>
+                                </ul>
+                            </div>
+                        </div>
+                        <div class="roadmap-point top-0 md:top-auto md:absolute md:translate-y-0">
+                            <i class="fas fa-mobile-alt"></i>
+                        </div>
+                        <div class="md:w-1/2 md:pl-10 text-left order-1 md:order-3">
+                            <!-- Empty div -->
+                        </div>
+                    </div>
+
+                    <!-- Item 4: DAO Governance Introduction -->
+                    <div class="relative roadmap-item flex flex-col md:flex-row items-center justify-between w-full">
+                        <div class="md:w-1/2 md:pl-10 text-left mb-6 md:mb-0 order-2 md:order-3">
+                            <div class="card p-6 rounded-xl shadow-lg hover:shadow-2xl">
+                                <h3 class="text-2xl font-semibold text-white mb-3">Introduction of Decentralized Autonomous Organization (DAO) Governance</h3>
+                                <p class="text-gray-300 text-left">
+                                    Empowering the Zetamax community with direct voting rights on key development and ecosystem decisions.
+                                </p>
+                            </div>
+                        </div>
+                        <div class="roadmap-point top-0 md:top-auto md:absolute md:translate-y-0">
+                            <i class="fas fa-users-cog"></i>
+                        </div>
+                        <div class="md:w-1/2 md:pr-10 text-right order-1 md:order-1">
+                            <!-- Empty div -->
+                        </div>
+                    </div>
+
+                    <!-- Item 5: NFT Certificates for Staking -->
+                    <div class="relative roadmap-item flex flex-col md:flex-row items-center justify-between w-full">
+                        <div class="md:w-1/2 md:pr-10 text-right mb-6 md:mb-0 order-2 md:order-1">
+                            <div class="card p-6 rounded-xl shadow-lg hover:shadow-2xl">
+                                <h3 class="text-2xl font-semibold text-white mb-3">Exclusive NFT Certificates for Staking Participation</h3>
+                                <p class="text-gray-300 text-left">
+                                    Rewarding long-term stakers with unique, verifiable NFT assets that signify their commitment and earn additional benefits.
+                                </p>
+                            </div>
+                        </div>
+                        <div class="roadmap-point top-0 md:top-auto md:absolute md:translate-y-0">
+                            <i class="fas fa-certificate"></i>
+                        </div>
+                        <div class="md:w-1/2 md:pl-10 text-left order-1 md:order-3">
+                            <!-- Empty div -->
+                        </div>
+                    </div>
+
+                    <!-- Item 6: CEX Listing Preparations -->
+                    <div class="relative roadmap-item flex flex-col md:flex-row items-center justify-between w-full">
+                        <div class="md:w-1/2 md:pl-10 text-left mb-6 md:mb-0 order-2 md:order-3">
+                            <div class="card p-6 rounded-xl shadow-lg hover:shadow-2xl">
+                                <h3 class="text-2xl font-semibold text-white mb-3">Strategic Centralized Exchange (CEX) Listing Preparations</h3>
+                                <p class="text-gray-300 text-left">
+                                    Expanding ZTMX accessibility to a broader global audience through major centralized exchange platforms.
+                                </p>
+                            </div>
+                        </div>
+                        <div class="roadmap-point top-0 md:top-auto md:absolute md:translate-y-0">
+                            <i class="fas fa-chart-bar"></i>
+                        </div>
+                        <div class="md:w-1/2 md:pr-10 text-right order-1 md:order-1">
+                            <!-- Empty div -->
+                        </div>
+                    </div>
+
+                    <!-- Item 7: Global Airdrops & Royalty Campaigns -->
+                    <div class="relative roadmap-item flex flex-col md:flex-row items-center justify-between w-full">
+                        <div class="md:w-1/2 md:pr-10 text-right mb-6 md:mb-0 order-2 md:order-1">
+                            <div class="card p-6 rounded-xl shadow-lg hover:shadow-2xl">
+                                <h3 class="text-2xl font-semibold text-white mb-3">Global Airdrops & Exclusive Royalty Campaigns</h3>
+                                <p class="text-gray-300 text-left">
+                                    Implementing initiatives to reward our dedicated community members and attract new participants worldwide.
+                                </p>
+                            </div>
+                        </div>
+                        <div class="roadmap-point top-0 md:top-auto md:absolute md:translate-y-0">
+                            <i class="fas fa-gift"></i>
+                        </div>
+                        <div class="md:w-1/2 md:pl-10 text-left order-1 md:order-3">
+                            <!-- Empty div -->
+                        </div>
+                    </div>
+
+                    <!-- Item 8: ZetamaxPay Merchant Gateway (Crypto Payments) -->
+                    <div class="relative roadmap-item flex flex-col md:flex-row items-center justify-between w-full">
+                        <div class="md:w-1/2 md:pl-10 text-left mb-6 md:mb-0 order-2 md:order-3">
+                            <div class="card p-6 rounded-xl shadow-lg hover:shadow-2xl">
+                                <h3 class="text-2xl font-semibold text-white mb-3">ZetamaxPay: Revolutionizing Merchant Crypto Payments</h3>
+                                <p class="text-gray-300 text-left">
+                                    Developing a seamless and secure gateway for businesses to accept ZTMX and other cryptocurrencies.
+                                </p>
+                            </div>
+                        </div>
+                        <div class="roadmap-point top-0 md:top-auto md:absolute md:translate-y-0">
+                            <i class="fas fa-wallet"></i>
+                        </div>
+                        <div class="md:w-1/2 md:pr-10 text-right order-1 md:order-1">
+                            <!-- Empty div -->
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- FAQ Section -->
+    <section id="faq" class="gradient-section py-20 md:py-28 text-gray-200">
+        <div class="container mx-auto px-6 text-center max-w-4xl">
+            <h2 class="text-4xl font-bold mb-12 text-white">❓ FAQs: Your Questions Answered</h2>
+            <div class="space-y-6 text-left">
+                <!-- FAQ Item 1 -->
+                <div class="card rounded-xl shadow-lg p-6">
+                    <div class="flex justify-between items-center faq-question" onclick="toggleAnswer(this)">
+                        <h3 class="text-xl font-semibold text-white">Q1. What core problem does Zetamax (ZTMX) aim to solve in the crypto landscape?</h3>
+                        <i class="fas fa-chevron-down text-purple-400 transform transition-transform duration-300"></i>
+                    </div>
+                    <div class="faq-answer mt-4 text-gray-300">
+                        <p>Zetamax addresses the critical need for a transparent, secure, and truly accessible decentralized finance (DeFi) platform. It provides a unique avenue for users to earn authentic crypto income through staking and incentivized community participation, all without reliance on centralized intermediaries, fostering genuine financial independence.</p>
+                    </div>
+                </div>
+
+                <!-- FAQ Item 2 -->
+                <div class="card rounded-xl shadow-lg p-6">
+                    <div class="flex justify-between items-center faq-question" onclick="toggleAnswer(this)">
+                        <h3 class="text-xl font-semibold text-white">Q2. How does Zetamax ensure the unwavering security and decentralization of its platform?</h3>
+                        <i class="fas fa-chevron-down text-purple-400 transform transition-transform duration-300"></i>
+                    </div>
+                    <div class="faq-answer mt-4 text-gray-300">
+                        <p>Zetamax is fundamentally built upon immutable smart contracts deployed on the Binance Smart Chain. This architectural choice means the operational rules of the platform are permanently encoded and impervious to alteration or manipulation by any single entity, including the original development team. This trustless design guarantees complete decentralization and eliminates administrative control, thereby significantly enhancing security for all participants.</p>
+                    </div>
+                </div>
+
+                <!-- FAQ Item 3 -->
+                <div class="card rounded-xl shadow-lg p-6">
+                    <div class="flex justify-between items-center faq-question" onclick="toggleAnswer(this)">
+                        <h3 class="text-xl font-semibold text-white">Q3. What are the primary advantages for individuals holding ZTMX tokens?</h3>
+                        <i class="fas fa-chevron-down text-purple-400 transform transition-transform duration-300"></i>
+                    </div>
+                    <div class="faq-answer mt-4 text-gray-300">
+                        <p>Holding ZTMX empowers users to actively participate in our decentralized staking platform, facilitating the generation of passive income. Furthermore, ZTMX holders are eligible for team-based rewards. As the Zetamax ecosystem expands, token holders will also benefit from potential value appreciation, direct involvement in DAO governance, and access to future utilities such as exclusive NFT certificates and seamless merchant payment solutions.</p>
+                    </div>
+                </div>
+
+                <!-- FAQ Item 4 -->
+                <div class="card rounded-xl shadow-lg p-6">
+                    <div class="flex justify-between items-center faq-question" onclick="toggleAnswer(this)">
+                        <h3 class="text-xl font-semibold text-white">Q4. What exciting developments are next on the Zetamax Coin roadmap?</h3>
+                        <i class="fas fa-chevron-down text-purple-400 transform transition-transform duration-300"></i>
+                    </div>
+                    <div class="faq-answer mt-4 text-gray-300">
+                        <p>Our strategic roadmap outlines several pivotal milestones, including the launch of a highly anticipated mobile-friendly Web App (PWA), the full implementation of DAO governance to empower community decision-making, the introduction of unique NFT Certificates for dedicated stakers, and strategic preparations for listings on major Centralized Exchanges (CEXs). Additionally, we plan to initiate global airdrops and loyalty-focused royalty campaigns. A significant upcoming development is the ZetamaxPay Merchant Gateway, poised to revolutionize crypto payments for businesses worldwide.</p>
+                    </div>
+                </div>
+
+                <!-- FAQ Item 5 (Whitepaper) -->
+                <div class="card rounded-xl shadow-lg p-6">
+                    <div class="flex justify-between items-center faq-question" onclick="toggleAnswer(this)">
+                        <h3 class="text-xl font-semibold text-white">Q5. Where can I access the comprehensive Zetamax Coin Whitepaper?</h3>
+                        <i class="fas fa-chevron-down text-purple-400 transform transition-transform duration-300"></i>
+                    </div>
+                    <div class="faq-answer mt-4 text-gray-300">
+                        <p class="mb-2">The official Zetamax Coin Whitepaper offers an in-depth exploration of our underlying technology, foundational vision, transparent tokenomics, and ambitious future development plans. You can download it directly here:</p>
+                        <a href="https://example.com/whitepaper.pdf" target="_blank" class="text-purple-400 hover:underline flex items-center">
+                            <i class="fas fa-file-alt mr-2"></i> Download Whitepaper (Placeholder)
+                        </a>
+                        <p class="mt-2 text-sm text-gray-400">*(Please note: This link is a placeholder. For official CoinMarketCap approval, ensure to provide your actual whitepaper URL.)*</p>
+                    </div>
+                </div>
+
+                <!-- FAQ Item 6 (How to Buy) -->
+                <div class="card rounded-xl shadow-lg p-6">
+                    <div class="flex justify-between items-center faq-question" onclick="toggleAnswer(this)">
+                        <h3 class="text-xl font-semibold text-white">Q6. What are the step-by-step instructions to acquire ZTMX tokens?</h3>
+                        <i class="fas fa-chevron-down text-purple-400 transform transition-transform duration-300"></i>
+                    </div>
+                    <div class="faq-answer mt-4 text-gray-300">
+                        <p class="mb-2">You can easily acquire ZTMX tokens on PancakeSwap, a leading decentralized exchange (DEX). The general process involves a few straightforward steps:</p>
+                        <ol class="list-decimal list-inside ml-4 space-y-1">
+                            <li>**Wallet Setup:** First, ensure you have a compatible cryptocurrency wallet (e.g., MetaMask, Trust Wallet) and it is funded with sufficient BNB (Binance Coin) to cover the purchase and transaction fees.</li>
+                            <li>**Connect to PancakeSwap:** Navigate to PancakeSwap's website and securely connect your wallet to the platform.</li>
+                            <li>**Swap BNB for ZTMX:** Use the swap interface on PancakeSwap to exchange your BNB for ZTMX. Always use our official contract address to ensure you are trading the correct token: <code class="bg-gray-700 px-1 py-0.5 rounded text-sm text-purple-300 break-all">0x424fbEAAb23303561b96872eE46863e68264054c</code></li>
+                        </ol>
+                        <p class="mt-2">For your convenience, here is a direct link to the PancakeSwap interface, pre-configured for ZTMX:</p>
+                        <a href="https://pancakeswap.finance/swap?outputCurrency=0x424fbEAAb23303561b96872eE46863e68264054c" target="_blank" class="btn-primary text-white font-semibold py-2 px-6 rounded-full shadow-lg hover:shadow-xl transition duration-300 text-sm flex items-center justify-center mt-4 mx-auto max-w-xs">
+                            <i class="fas fa-external-link-alt mr-2"></i> Buy ZTMX on PancakeSwap
+                        </a>
+                    </div>
+                </div>
+
+                 <!-- FAQ Item 7 (What is DeFi?) -->
+                <div class="card rounded-xl shadow-lg p-6">
+                    <div class="flex justify-between items-center faq-question" onclick="toggleAnswer(this)">
+                        <h3 class="text-xl font-semibold text-white">Q7. What exactly is Decentralized Finance (DeFi), and how does Zetamax seamlessly integrate into this innovative ecosystem?</h3>
+                        <i class="fas fa-chevron-down text-purple-400 transform transition-transform duration-300"></i>
+                    </div>
+                    <div class="faq-answer mt-4 text-gray-300">
+                        <p>Decentralized Finance (DeFi) represents a paradigm shift in financial services, operating entirely on blockchain technology to bypass traditional intermediaries like banks and financial institutions. It facilitates peer-to-peer transactions, lending, borrowing, and a myriad of other financial activities through self-executing smart contracts. Zetamax Coin is an integral component of the burgeoning DeFi ecosystem by offering a robust decentralized staking platform, enabling consistent passive income generation and fostering true community-driven governance, thereby empowering users with unprecedented financial autonomy.</p>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    <!-- Official Links Section -->
+    <section id="official-links" class="py-20 md:py-28 bg-gray-900 text-gray-200">
+        <div class="container mx-auto px-6 text-center max-w-4xl">
+            <h2 class="text-4xl font-bold mb-12 text-white">🔗 Official Links: Connect with Our Global Community</h2>
+            <p class="text-lg mb-10 max-w-2xl mx-auto">
+                Join the vibrant Zetamax community and stay updated across all our official channels. Your voice is important to us!
+            </p>
+            <div class="flex flex-wrap justify-center gap-8 mb-12">
+                <!-- Telegram -->
+                <a href="https://t.me/zetamaxofficial" target="_blank" class="social-icon-colored text-6xl" style="color: #229ED9;" aria-label="Telegram">
+                    <i class="fab fa-telegram"></i>
+                </a>
+                <!-- YouTube -->
+                <a href="https://youtube.com/@zetamaxofficial?si=0W7Yef85EGxq8NGv" target="_blank" class="social-icon-colored text-6xl" style="color: #FF0000;" aria-label="YouTube">
+                    <i class="fab fa-youtube-square"></i>
+                </a>
+                <!-- Facebook -->
+                <a href="https://www.facebook.com/share/1Ah7jka25m/" target="_blank" class="social-icon-colored text-6xl" style="color: #1877F2;" aria-label="Facebook">
+                    <i class="fab fa-facebook-square"></i>
+                </a>
+                <!-- Instagram (using a representative solid color as gradients are hard with font awesome) -->
+                <a href="https://www.instagram.com/zetamaxofficial?igsh=MWV2MmJoMDIzaDIyeA==" target="_blank" class="social-icon-colored text-6xl" style="color: #E4405F;" aria-label="Instagram">
+                    <i class="fab fa-instagram-square"></i>
+                </a>
+                <!-- Twitter (now X, using black for the X logo) -->
+                <a href="https://x.com/zetamax67367?t=2W_1Zcvdkr58j7mBZwP-sg&s=09" target="_blank" class="social-icon-colored text-6xl" style="color: #000000;" aria-label="Twitter">
+                    <i class="fab fa-twitter-square"></i>
+                </a>
+                <!-- Discord -->
+                <a href="https://discord.gg/p6Yq6Tew" target="_blank" class="social-icon-colored text-6xl" style="color: #5865F2;" aria-label="Discord">
+                    <i class="fab fa-discord"></i>
+                </a>
+            </div>
+            <p class="text-lg text-gray-400">
+                Have questions? Reach out to us directly at: <a href="mailto:info@zetamaxcoin.com" class="text-purple-400 hover:underline">info@zetamaxcoin.com</a>
+            </p>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="bg-gray-950 py-8 text-gray-400 text-center text-sm">
+        <div class="container mx-auto px-6">
+            <p>&copy; 2025 Zetamax Coin. All rights reserved. | <a href="#" class="hover:text-white transition duration-300">Privacy Policy</a> | <a href="#" class="hover:text-white transition duration-300">Terms of Service</a></p>
+            <p class="mt-4 disclaimer-text">
+                <i class="fas fa-exclamation-triangle text-yellow-500 mr-2"></i> **Disclaimer:** Zetamax Coin is a decentralized cryptocurrency project. This website is provided for informational purposes only and does not constitute financial or investment advice. All investments in cryptocurrencies involve inherent and substantial risks, including the potential for complete loss of invested capital. Users are unequivocally advised to conduct their own diligent research (DYOR) and seek counsel from a qualified financial advisor before making any investment decisions.
+            </p>
+        </div>
+    </footer>
+
+    <script>
+        // Smooth scrolling for navigation links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const targetId = this.getAttribute('href');
+                const targetElement = document.querySelector(targetId);
+                if (targetElement) {
+                    // Get header height for offset
+                    const header = document.querySelector('header');
+                    const headerHeight = header ? header.offsetHeight : 0;
+
+                    window.scrollTo({
+                        top: targetElement.offsetTop - headerHeight,
+                        behavior: 'smooth'
+                    });
+                }
+                // Close mobile menu if open
+                const mobileMenu = document.getElementById('mobile-menu');
+                if (!mobileMenu.classList.contains('hidden')) {
+                    mobileMenu.classList.add('hidden');
+                }
+            });
+        });
+
+        // Mobile menu toggle
+        const menuButton = document.getElementById('menu-button');
+        const mobileMenu = document.getElementById('mobile-menu');
+
+        menuButton.addEventListener('click', () => {
+            mobileMenu.classList.toggle('hidden');
+        });
+
+        // Hide mobile menu when clicking outside (optional, but good UX)
+        document.addEventListener('click', (event) => {
+            if (!mobileMenu.contains(event.target) && !menuButton.contains(event.target)) {
+                if (!mobileMenu.classList.contains('hidden')) {
+                    mobileMenu.classList.add('hidden');
+                }
+            }
+        });
+
+        // FAQ Accordion Toggle
+        function toggleAnswer(element) {
+            const answer = element.nextElementSibling;
+            const icon = element.querySelector('.fas');
+
+            // Close all other open answers
+            document.querySelectorAll('.faq-answer.active').forEach(openAnswer => {
+                if (openAnswer !== answer) { // Don't close the current one if it's already active
+                    openAnswer.style.maxHeight = null;
+                    openAnswer.classList.remove('active');
+                    openAnswer.previousElementSibling.querySelector('.fas').classList.remove('rotate-180');
+                }
+            });
+
+            if (answer.classList.contains('active')) {
+                answer.classList.remove('active');
+                answer.style.maxHeight = null;
+                icon.classList.remove('rotate-180');
+            } else {
+                answer.classList.add('active');
+                answer.style.maxHeight = answer.scrollHeight + "px"; // Set max-height to scrollHeight
+                icon.classList.add('rotate-180');
+            }
+        }
+
+        // Chart for Token Distribution
+        function createDistributionChart() {
+            const ctx = document.getElementById('distributionChart').getContext('2d');
+            const data = {
+                labels: ['Liquidity', 'Staking Reward', 'Presale', 'Development', 'Creator', 'Software Maintenance'],
+                datasets: [{
+                    data: [40, 22, 20, 10, 5, 3],
+                    backgroundColor: [
+                        '#6d28d9', // Deep Purple
+                        '#8b5cf6', // Medium Purple
+                        '#a78bfa', // Light Purple
+                        '#c4b5fd', // Lighter Purple
+                        '#e0e7ff', // Very Light Purple
+                        '#d1d5db'  // Gray for contrast
+                    ],
+                    borderColor: '#2d3748', // Card background color for separation
+                    borderWidth: 2
+                }]
+            };
+
+            const options = {
+                responsive: true,
+                maintainAspectRatio: false, // Allows the chart to fill its container
+                plugins: {
+                    legend: {
+                        position: 'right', // Position legend to the right
+                        labels: {
+                            color: '#e2e8f0', // Light text for legend labels
+                            font: {
+                                size: 14 // Larger font for readability
+                            }
+                        }
+                    },
+                    tooltip: {
+                        callbacks: {
+                            label: function(context) {
+                                let label = context.label || '';
+                                if (label) {
+                                    label += ': ';
+                                }
+                                if (context.parsed !== null) {
+                                    label += context.parsed + '%';
+                                }
+                                return label;
+                            }
+                        }
+                    }
+                },
+                layout: {
+                    padding: {
+                        left: 0,
+                        right: 20, // Add some padding on the right to prevent overlap with legend
+                        top: 0,
+                        bottom: 0
+                    }
+                }
+            };
+
+            new Chart(ctx, {
+                type: 'pie',
+                data: data,
+                options: options
+            });
+        }
+
+        // Create the distribution chart on page load
+        document.addEventListener('DOMContentLoaded', createDistributionChart);
+    </script>
+
+</body>
+</html>
