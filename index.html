@@ -6,7 +6,6 @@
     <title>Zetamax Coin | Next-Generation Blockchain Technology</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Orbitron:wght@400;500;600;700&family=Exo+2:wght@400;500;600;700&display=swap" rel="stylesheet">
-    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <style>
         :root {
             --primary: #0a0f2b;
@@ -397,139 +396,6 @@
             line-height: 1;
         }
 
-        /* Live Chart Section */
-        .chart-section {
-            background: rgba(0, 0, 0, 0.2);
-            padding: 80px 0;
-        }
-
-        .chart-container {
-            background: var(--card-bg);
-            border-radius: var(--border-radius);
-            padding: 25px;
-            border: 1px solid rgba(255, 255, 255, 0.1);
-            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
-            margin-top: 30px;
-            position: relative;
-            overflow: hidden;
-        }
-
-        .chart-container::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 4px;
-            background: var(--gradient);
-        }
-
-        .chart-header {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            margin-bottom: 20px;
-            flex-wrap: wrap;
-            gap: 15px;
-        }
-
-        .chart-title {
-            font-family: 'Exo 2', sans-serif;
-            font-size: 1.8rem;
-            font-weight: 700;
-            color: var(--text);
-            display: flex;
-            align-items: center;
-            gap: 10px;
-        }
-
-        .time-selector {
-            display: flex;
-            gap: 10px;
-            background: rgba(255, 255, 255, 0.05);
-            padding: 8px;
-            border-radius: 30px;
-            border: 1px solid rgba(255, 255, 255, 0.1);
-        }
-
-        .time-btn {
-            padding: 8px 15px;
-            border-radius: 30px;
-            background: transparent;
-            color: var(--text-secondary);
-            border: none;
-            cursor: pointer;
-            font-family: 'Exo 2', sans-serif;
-            font-size: 14px;
-            transition: var(--transition);
-        }
-
-        .time-btn.active, .time-btn:hover {
-            background: var(--gradient);
-            color: var(--primary);
-        }
-
-        .price-info {
-            display: flex;
-            align-items: center;
-            gap: 15px;
-            margin-bottom: 20px;
-            flex-wrap: wrap;
-        }
-
-        .current-price {
-            font-family: 'Orbitron', sans-serif;
-            font-size: 2.2rem;
-            font-weight: 700;
-            color: var(--success);
-        }
-
-        .price-change {
-            font-family: 'Exo 2', sans-serif;
-            font-size: 1.1rem;
-            padding: 5px 15px;
-            border-radius: 30px;
-            background: rgba(0, 255, 149, 0.15);
-            color: var(--success);
-        }
-
-        .price-change.negative {
-            background: rgba(255, 107, 107, 0.15);
-            color: #ff6b6b;
-        }
-
-        .chart-wrapper {
-            width: 100%;
-            height: 400px;
-            position: relative;
-        }
-
-        .chart-actions {
-            display: flex;
-            justify-content: flex-end;
-            gap: 15px;
-            margin-top: 20px;
-        }
-
-        .chart-action-btn {
-            padding: 8px 20px;
-            border-radius: 30px;
-            background: rgba(255, 255, 255, 0.05);
-            color: var(--text);
-            border: 1px solid rgba(255, 255, 255, 0.1);
-            cursor: pointer;
-            font-family: 'Exo 2', sans-serif;
-            transition: var(--transition);
-            display: flex;
-            align-items: center;
-            gap: 8px;
-        }
-
-        .chart-action-btn:hover {
-            background: rgba(0, 195, 255, 0.15);
-            border-color: rgba(0, 195, 255, 0.3);
-        }
-
         /* Tokenomics Section */
         .tokenomics-container {
             display: grid;
@@ -577,20 +443,20 @@
             font-family: 'Exo 2', sans-serif;
         }
 
-        .pie-chart-container {
+        .chart-container {
             position: relative;
             width: 100%;
             max-width: 300px;
             margin: 0 auto;
         }
 
-        .pie-chart {
+        .chart {
             position: relative;
             width: 100%;
             padding-bottom: 100%;
         }
 
-        .pie-chart-slice {
+        .chart-slice {
             position: absolute;
             width: 100%;
             height: 100%;
@@ -607,7 +473,7 @@
             box-shadow: 0 0 20px rgba(0, 0, 0, 0.3);
         }
 
-        .pie-chart-center {
+        .chart-center {
             position: absolute;
             top: 50%;
             left: 50%;
@@ -979,15 +845,6 @@
             .tokenomics-details {
                 grid-template-columns: 1fr;
             }
-
-            .chart-header {
-                flex-direction: column;
-                align-items: flex-start;
-            }
-
-            .chart-wrapper {
-                height: 300px;
-            }
         }
 
         @media (max-width: 480px) {
@@ -1011,14 +868,6 @@
                 width: 100%;
                 justify-content: center;
             }
-
-            .current-price {
-                font-size: 1.8rem;
-            }
-
-            .chart-wrapper {
-                height: 250px;
-            }
         }
     </style>
 </head>
@@ -1035,7 +884,7 @@
                 </a>
                 <nav class="nav-links">
                     <a href="#home" class="active">Home</a>
-                    <a href="#chart">Live Chart</a>
+                    <a href="#about">About</a>
                     <a href="#tokenomics">Tokenomics</a>
                     <a href="#roadmap">Roadmap</a>
                     <a href="#links">Links</a>
@@ -1067,54 +916,40 @@
         </div>
     </section>
 
-    <!-- Live Chart Section -->
-    <section id="chart" class="chart-section">
+    <!-- About Section -->
+    <section id="about">
         <div class="container">
-            <h2 class="section-title">Live Price Chart</h2>
-            <p class="section-subtitle">Track ZTMX performance in real-time with our interactive chart</p>
+            <h2 class="section-title">About Us</h2>
+            <p class="section-subtitle">Zetamax is a decentralized cryptocurrency project developed with a focus on financial freedom, community empowerment, and borderless innovation.</p>
             
-            <div class="chart-container">
-                <div class="chart-header">
-                    <div class="chart-title">
-                        <i class="fas fa-chart-line"></i>
-                        ZTMX / USDT Live Chart
+            <div class="section-grid">
+                <div class="card">
+                    <div class="card-icon">
+                        <i class="fas fa-bullseye"></i>
                     </div>
-                    <div class="time-selector">
-                        <button class="time-btn active">1H</button>
-                        <button class="time-btn">1D</button>
-                        <button class="time-btn">1W</button>
-                        <button class="time-btn">1M</button>
-                        <button class="time-btn">1Y</button>
+                    <h3>Our Mission</h3>
+                    <p>Our mission is to democratize digital finance by offering easy access to secure blockchain-based staking, referral rewards, and decentralized applications for everyone—regardless of their background.</p>
+                </div>
+                
+                <div class="card">
+                    <div class="card-icon">
+                        <i class="fas fa-eye"></i>
                     </div>
-                </div>
-                
-                <div class="price-info">
-                    <div class="current-price">$0.00273</div>
-                    <div class="price-change">+3.42%</div>
-                    <div class="volume">24h Vol: $1.24M</div>
-                </div>
-                
-                <div class="chart-wrapper">
-                    <canvas id="cryptoChart"></canvas>
-                </div>
-                
-                <div class="chart-actions">
-                    <button class="chart-action-btn">
-                        <i class="fas fa-exchange-alt"></i> Trade
-                    </button>
-                    <button class="chart-action-btn">
-                        <i class="fas fa-star"></i> Watchlist
-                    </button>
-                    <button class="chart-action-btn">
-                        <i class="fas fa-share-alt"></i> Share
-                    </button>
+                    <h3>Our Vision</h3>
+                    <p>We envision a world where financial opportunities are accessible to all. Zetamax aims to become the foundation of a decentralized ecosystem that supports real-world use cases for millions of users worldwide.</p>
                 </div>
             </div>
+            
+            <div class="quote">
+                <p>"Zetamax isn't just a digital asset, it's a commitment to financial liberation."</p>
+            </div>
+            
+            <p>With Zetamax, you don't just own a token—you own a vision of the future. We aim to create a powerful ecosystem where users can stake, earn, trade, and grow their wealth with transparency and trust.</p>
         </div>
     </section>
 
     <!-- Tokenomics Section -->
-    <section id="tokenomics">
+    <section id="tokenomics" style="background: rgba(0,0,0,0.2);">
         <div class="container">
             <h2 class="section-title">Tokenomics</h2>
             <p class="section-subtitle">Zetamax Token (ZTMX) is designed for sustainability and growth with a transparent allocation model.</p>
@@ -1148,10 +983,10 @@
                 </div>
                 
                 <div>
-                    <div class="pie-chart-container">
-                        <div class="pie-chart">
-                            <div class="pie-chart-slice"></div>
-                            <div class="pie-chart-center"></div>
+                    <div class="chart-container">
+                        <div class="chart">
+                            <div class="chart-slice"></div>
+                            <div class="chart-center"></div>
                         </div>
                     </div>
                     
@@ -1187,7 +1022,7 @@
     </section>
 
     <!-- Roadmap Section -->
-    <section id="roadmap" style="background: rgba(0,0,0,0.2);">
+    <section id="roadmap">
         <div class="container">
             <h2 class="section-title">Roadmap</h2>
             <p class="section-subtitle">Our strategic plan to build a decentralized financial ecosystem</p>
@@ -1246,7 +1081,7 @@
     </section>
 
     <!-- Links Section -->
-    <section id="links">
+    <section id="links" style="background: rgba(0,0,0,0.2);">
         <div class="container">
             <h2 class="section-title">Official Links</h2>
             <p class="section-subtitle">Connect with us across platforms</p>
@@ -1304,7 +1139,7 @@
                 
                 <div class="footer-links">
                     <a href="#home">Home</a>
-                    <a href="#chart">Live Chart</a>
+                    <a href="#about">About</a>
                     <a href="#tokenomics">Tokenomics</a>
                     <a href="#roadmap">Roadmap</a>
                     <a href="#links">Links</a>
@@ -1375,141 +1210,6 @@
             }
         }
 
-        // Initialize crypto chart
-        function initCryptoChart() {
-            const ctx = document.getElementById('cryptoChart').getContext('2d');
-            
-            // Generate sample data for the chart
-            const labels = [];
-            const data = [];
-            let currentPrice = 0.002;
-            
-            for (let i = 0; i < 50; i++) {
-                labels.push('');
-                const change = (Math.random() - 0.5) * 0.0003;
-                currentPrice += change;
-                data.push(currentPrice);
-            }
-            
-            const gradient = ctx.createLinearGradient(0, 0, 0, 400);
-            gradient.addColorStop(0, 'rgba(0, 195, 255, 0.3)');
-            gradient.addColorStop(1, 'rgba(0, 195, 255, 0.05)');
-            
-            const chart = new Chart(ctx, {
-                type: 'line',
-                data: {
-                    labels: labels,
-                    datasets: [{
-                        label: 'ZTMX Price',
-                        data: data,
-                        borderColor: '#00c3ff',
-                        borderWidth: 2,
-                        pointRadius: 0,
-                        pointHoverRadius: 5,
-                        fill: true,
-                        backgroundColor: gradient,
-                        tension: 0.4
-                    }]
-                },
-                options: {
-                    responsive: true,
-                    maintainAspectRatio: false,
-                    plugins: {
-                        legend: {
-                            display: false
-                        },
-                        tooltip: {
-                            mode: 'index',
-                            intersect: false,
-                            backgroundColor: 'rgba(10, 15, 43, 0.9)',
-                            titleFont: {
-                                family: "'Exo 2', sans-serif"
-                            },
-                            bodyFont: {
-                                family: "'Exo 2', sans-serif"
-                            },
-                            padding: 12,
-                            borderColor: 'rgba(0, 195, 255, 0.3)',
-                            borderWidth: 1,
-                            callbacks: {
-                                label: function(context) {
-                                    return `Price: $${context.parsed.y.toFixed(6)}`;
-                                }
-                            }
-                        }
-                    },
-                    scales: {
-                        x: {
-                            display: false,
-                            grid: {
-                                display: false
-                            }
-                        },
-                        y: {
-                            grid: {
-                                color: 'rgba(255, 255, 255, 0.05)'
-                            },
-                            ticks: {
-                                color: 'rgba(255, 255, 255, 0.7)',
-                                font: {
-                                    family: "'Exo 2', sans-serif"
-                                },
-                                callback: function(value) {
-                                    return '$' + value.toFixed(5);
-                                }
-                            }
-                        }
-                    },
-                    interaction: {
-                        mode: 'index',
-                        intersect: false
-                    }
-                }
-            });
-            
-            // Time selector functionality
-            const timeButtons = document.querySelectorAll('.time-btn');
-            timeButtons.forEach(button => {
-                button.addEventListener('click', function() {
-                    timeButtons.forEach(btn => btn.classList.remove('active'));
-                    this.classList.add('active');
-                    
-                    // In a real implementation, this would update the chart data
-                    // For this demo, we'll just simulate data refresh
-                    const newData = [];
-                    let newPrice = 0.212;
-                    
-                    for (let i = 0; i < 50; i++) {
-                        const change = (Math.random() - 0.5) * 0.0003;
-                        newPrice += change;
-                        newData.push(newPrice);
-                    }
-                    
-                    chart.data.datasets[0].data = newData;
-                    chart.update();
-                    
-                    // Update the price display
-                    const currentPriceElement = document.querySelector('.current-price');
-                    const priceChangeElement = document.querySelector('.price-change');
-                    
-                    const priceChange = ((newData[newData.length - 1] - 0.002) / 0.002) * 100;
-                    const changeFormatted = priceChange.toFixed(2);
-                    
-                    currentPriceElement.textContent = `$${newData[newData.length - 1].toFixed(5)}`;
-                    
-                    if (priceChange >= 0) {
-                        priceChangeElement.textContent = `+${changeFormatted}%`;
-                        priceChangeElement.classList.remove('negative');
-                        priceChangeElement.classList.add('positive');
-                    } else {
-                        priceChangeElement.textContent = `${changeFormatted}%`;
-                        priceChangeElement.classList.remove('positive');
-                        priceChangeElement.classList.add('negative');
-                    }
-                });
-            });
-        }
-
         // Smooth scrolling for navigation links
         document.querySelectorAll('a[href^="#"]').forEach(anchor => {
             anchor.addEventListener('click', function (e) {
@@ -1557,9 +1257,6 @@
         
         // Initialize when page loads
         window.addEventListener('load', function() {
-            // Initialize chart
-            initCryptoChart();
-            
             // Add active class to home link by default
             document.querySelector('.nav-links a[href="#home"]').classList.add('active');
         });
